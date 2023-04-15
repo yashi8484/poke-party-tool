@@ -1,0 +1,9 @@
+{
+  "name": "poketool",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "deno run --allow-read --allow-net index.ts"
+  },
+  "license": "MIT"
+}
