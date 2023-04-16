@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "deno run --allow-read --allow-net index.ts",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "nessie": "deno run -A --unstable https://deno.land/x/nessie/cli.ts"
   },
   "license": "MIT",
   "devDependencies": {
