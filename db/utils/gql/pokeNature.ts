@@ -1,8 +1,7 @@
 import { gql } from "npm:urql@latest";
 import { getGqlClient } from "../gql.ts";
 import type { Pokemon_V2_Nature } from "../../generated/pokeapi.ts";
-
-const DEFAULT_LANGUAGE_NAME = "ja-Hrkt";
+import { DEFAULT_LANGUAGE_NAME } from "../constants.ts";
 
 const LIST_POKE_NATURES_QUERY = gql`
   query listPokeNaturesQuery($languageName: String!) {
