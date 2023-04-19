@@ -1,4 +1,4 @@
-import { PokeNature } from "../gql/pokeNature.ts";
+import type { PokeNature } from "../gql/pokeNature.ts";
 import { connectPostgres, getTruncateQuery } from "../sql.ts";
 
 export const insertPokeNatures = async (

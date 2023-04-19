@@ -14,7 +14,8 @@ export default class extends AbstractMigration<ClientPostgreSQL> {
             defender_type_id smallint NOT NULL,
             effectiveness smallint NOT NULL,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE (attacker_type_id, defender_type_id)
           );
         `);
   }
