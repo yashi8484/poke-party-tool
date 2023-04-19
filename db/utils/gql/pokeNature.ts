@@ -20,7 +20,7 @@ type ListPokeNaturesData = {
   pokemon_v2_nature: Pick<Pokemon_V2_Nature, "pokemon_v2_naturenames">[];
 };
 
-type PokeNature = {
+export type PokeNature = {
   name: string;
 };
 
