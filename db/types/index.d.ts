@@ -1,13 +1,15 @@
+type TypeId = number;
+
 type PokeType = {
-  typeId: Number;
+  typeId: TypeId;
   name: string;
   attackerEffectivenesses: {
-    targetTypeId: Number;
-    effectiveness: Number;
+    targetTypeId: number;
+    effectiveness: number;
   }[];
   defenderEffectivenesses: {
-    damageTypeId: Number;
-    effectiveness: Number;
+    damageTypeId: number;
+    effectiveness: number;
   }[];
 };
 
@@ -19,4 +21,5 @@ type Pokemon = {
   pokedexNumber: number;
   speciesId: number;
   name: string;
+  typeIds: TypeId[];
 };

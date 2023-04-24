@@ -49,6 +49,10 @@ const convertPokemons = (data: ListPokemonsData | undefined): Pokemon[] =>
           speciesId: queryPokedexNum.pokemon_species_id!,
           name: queryPokedexNum.pokemon_v2_pokemonspecy
             ?.pokemon_v2_pokemonspeciesnames[0].name!,
+          typeIds:
+            queryPokedexNum.pokemon_v2_pokemonspecy!.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes.map(
+              (queryType) => queryType.pokemon_v2_type!.id
+            ),
         })
       )
     : [];
