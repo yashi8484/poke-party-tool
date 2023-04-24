@@ -4,7 +4,7 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: "https://beta.pokeapi.co/graphql/v1beta",
   generates: {
-    "generated/pokeapi.ts": {
+    "types/generated/pokeapi.ts": {
       plugins: ["typescript"],
     },
   },
