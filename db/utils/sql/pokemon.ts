@@ -1,4 +1,3 @@
-import type { Pokemon } from "../gql/pokemon.ts";
 import { connectPostgres, getTruncateQuery } from "../sql.ts";
 
 export const insertPokemons = async (

@@ -1,6 +1,6 @@
 import { gql } from "npm:urql@latest";
 import { getGqlClient } from "../gql.ts";
-import type { Pokemon_V2_Nature } from "../../generated/pokeapi.ts";
+import type { Pokemon_V2_Nature } from "/types/generated/pokeapi.ts";
 import { DEFAULT_LANGUAGE_NAME } from "../constants.ts";
 
 const LIST_POKE_NATURES_QUERY = gql`
@@ -17,10 +17,6 @@ const LIST_POKE_NATURES_QUERY = gql`
 
 type ListPokeNaturesData = {
   pokemon_v2_nature: Pick<Pokemon_V2_Nature, "pokemon_v2_naturenames">[];
-};
-
-export type PokeNature = {
-  name: string;
 };
 
 const convertPokeNatures = (

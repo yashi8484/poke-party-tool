@@ -1,6 +1,6 @@
 import { gql } from "npm:urql@latest";
 import { getGqlClient } from "../gql.ts";
-import type { Pokemon_V2_Pokedex } from "../../generated/pokeapi.ts";
+import type { Pokemon_V2_Pokedex } from "/types/generated/pokeapi.ts";
 import { DEFAULT_LANGUAGE_NAME, VERSION_GROUP_ID_SV } from "../constants.ts";
 
 const LIST_POKEMONS_QUERY = gql`
@@ -21,6 +21,13 @@ const LIST_POKEMONS_QUERY = gql`
           ) {
             name
           }
+          pokemon_v2_pokemons {
+            pokemon_v2_pokemontypes {
+              pokemon_v2_type {
+                id
+              }
+            }
+          }
         }
       }
     }
@@ -32,12 +39,6 @@ type ListPokemonsData = {
     Pokemon_V2_Pokedex,
     "pokemon_v2_pokemondexnumbers"
   >[];
-};
-
-export type Pokemon = {
-  pokedexNumber: number;
-  speciesId: number;
-  name: string;
 };
 
 const convertPokemons = (data: ListPokemonsData | undefined): Pokemon[] =>

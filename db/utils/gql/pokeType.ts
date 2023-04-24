@@ -1,6 +1,6 @@
 import { gql } from "npm:urql@latest";
 import { getGqlClient } from "../gql.ts";
-import type { Pokemon_V2_Type } from "../../generated/pokeapi.ts";
+import type { Pokemon_V2_Type } from "/types/generated/pokeapi.ts";
 import { DEFAULT_LANGUAGE_NAME } from "../constants.ts";
 
 // 余計なタイプが混ざるため、必要なタイプのみ取れるようにするため id 条件を付与
@@ -33,19 +33,6 @@ type ListPokeTypesData = {
     | "pokemon_v2_typeefficacies"
     | "pokemonV2TypeefficaciesByTargetTypeId"
   >[];
-};
-
-export type PokeType = {
-  typeId: Number;
-  name: string;
-  attackerEffectivenesses: {
-    targetTypeId: Number;
-    effectiveness: Number;
-  }[];
-  defenderEffectivenesses: {
-    damageTypeId: Number;
-    effectiveness: Number;
-  }[];
 };
 
 const convertPokeTypes = (data: ListPokeTypesData | undefined): PokeType[] =>
