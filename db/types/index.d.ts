@@ -13,6 +13,11 @@ type PokeType = {
   }[];
 };
 
+type PokeAbility = {
+  abilityId: number;
+  name: string;
+};
+
 type PokeNature = {
   name: string;
 };
@@ -22,4 +27,5 @@ type Pokemon = {
   speciesId: number;
   name: string;
   typeIds: TypeId[];
+  abilities: PokeAbility[];
 };
