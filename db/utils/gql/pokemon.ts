@@ -39,6 +39,19 @@ const LIST_POKEMONS_QUERY = gql`
                 }
               }
             }
+            pokemon_v2_pokemonmoves {
+              pokemon_v2_move {
+                id
+                type_id
+                pokemon_v2_movenames(
+                  where: {
+                    pokemon_v2_language: { name: { _eq: $languageName } }
+                  }
+                ) {
+                  name
+                }
+              }
+            }
           }
         }
       }
@@ -71,6 +84,14 @@ const convertPokemons = (data: ListPokemonsData | undefined): Pokemon[] =>
                 abilityId: queryAbility.pokemon_v2_ability!.id,
                 name: queryAbility.pokemon_v2_ability!
                   .pokemon_v2_abilitynames[0].name,
+              })
+            ),
+          moves:
+            queryPokedexNum.pokemon_v2_pokemonspecy!.pokemon_v2_pokemons[0].pokemon_v2_pokemonmoves.map(
+              (queryMove) => ({
+                moveId: queryMove.pokemon_v2_move!.id,
+                name: queryMove.pokemon_v2_move?.pokemon_v2_movenames[0].name!,
+                typeId: queryMove.pokemon_v2_move?.type_id!,
               })
             ),
         })

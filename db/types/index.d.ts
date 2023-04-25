@@ -22,10 +22,17 @@ type PokeNature = {
   name: string;
 };
 
+type PokeMove = {
+  moveId: number;
+  name: string;
+  typeId: TypeId;
+};
+
 type Pokemon = {
   pokedexNumber: number;
   speciesId: number;
   name: string;
   typeIds: TypeId[];
   abilities: PokeAbility[];
+  moves: PokeMove[];
 };

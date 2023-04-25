@@ -37,11 +37,29 @@ export const insertPokemons = async (
     )
     .join(",");
 
+  const pokeMoveValues = pokemons
+    .map((pokemon) =>
+      pokemon.moves
+        .map((move) => `(${move.moveId}, '${move.name}', ${move.typeId})`)
+        .join(",")
+    )
+    .join(",");
+
+  const pokemonMoveValues = pokemons
+    .map((pokemon) =>
+      pokemon.moves
+        .map((move) => `(${pokemon.speciesId}, ${move.moveId})`)
+        .join(",")
+    )
+    .join(",");
+
   if (truncateData) {
     client.queryArray(getTruncateQuery("public.pokemons"));
     client.queryArray(getTruncateQuery("public.pokemon_types"));
     client.queryArray(getTruncateQuery("public.pokemon_abilities"));
+    client.queryArray(getTruncateQuery("public.pokemon_moves"));
     client.queryArray(getTruncateQuery("public.poke_abilities"));
+    client.queryArray(getTruncateQuery("public.poke_moves"));
   }
   client.queryArray(
     `INSERT INTO public.pokemons (pokedex_number, species_id, name) VALUES ${pokemonValues};`
@@ -55,6 +73,13 @@ export const insertPokemons = async (
   // gql の取得結果に重複データが含まれてしまうため、インサート時の ON CONFLICT で回避する
   client.queryArray(
     `INSERT INTO public.pokemon_abilities (species_id, ability_id) VALUES ${pokemonAbilityValues} ON CONFLICT DO NOTHING;`
+  );
+  client.queryArray(
+    `INSERT INTO public.poke_moves (move_id, name, type_id) VALUES ${pokeMoveValues} ON CONFLICT DO NOTHING;`
+  );
+  // gql の取得結果に重複データが含まれてしまうため、インサート時の ON CONFLICT で回避する
+  client.queryArray(
+    `INSERT INTO public.pokemon_moves (species_id, move_id) VALUES ${pokemonMoveValues} ON CONFLICT DO NOTHING;`
   );
   // おそらく client 変数がスコープ外となったことがきっかけで、暗黙的に client.end() が呼び出される？模様。
   // これにより client.end() が二重で呼び出されエラーとなってしまうため、endPostgres() を呼び出さないようにする。
