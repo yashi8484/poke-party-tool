@@ -13,7 +13,8 @@ export default class extends AbstractMigration<ClientPostgreSQL> {
         species_id smallint NOT NULL,
         move_id smallint NOT NULL,
         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (species_id, move_id)
       );
     `);
   }
