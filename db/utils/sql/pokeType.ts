@@ -7,7 +7,10 @@ export const insertPokeTypes = async (
   const client = await connectPostgres();
 
   const typeValues = pokeTypes
-    .map((pokeType) => `(${pokeType.typeId}, '${pokeType.name}')`)
+    .map(
+      (pokeType) =>
+        `(${pokeType.typeId}, '${pokeType.name}', '${pokeType.iconFile}')`
+    )
     .join(",");
 
   const effectivenessValues = pokeTypes
@@ -30,10 +33,10 @@ export const insertPokeTypes = async (
     client.queryArray(getTruncateQuery("public.poke_type_effectivenesses"));
   }
   client.queryArray(
-    `INSERT INTO public.poke_types (type_id, name) VALUES ${typeValues};`
+    `INSERT INTO public.poke_types (type_id, name, icon_file) VALUES ${typeValues};`
   );
   client.queryArray(
-    `INSERT INTO public.poke_type_effectivenesses (attacker_type_id, defender_type_id, effectiveness) VALUES ${effectivenessValues};`
+    `INSERT INTO public.poke_type_effectivenesses (attacker_type_id, defender_type_id, effectiveness) VALUES ${effectivenessValues} ON CONFLICT DO NOTHING;`
   );
 
   // おそらく client 変数がスコープ外となったことがきっかけで、暗黙的に client.end() が呼び出される？模様。

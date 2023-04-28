@@ -3,6 +3,7 @@ type TypeId = number;
 type PokeType = {
   typeId: TypeId;
   name: string;
+  iconFile: string;
   attackerEffectivenesses: {
     targetTypeId: number;
     effectiveness: number;

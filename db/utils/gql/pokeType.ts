@@ -8,6 +8,7 @@ const LIST_POKE_TYPES_QUERY = gql`
   query listPokeTypesQuery($languageName: String!) {
     pokemon_v2_type(where: { id: { _lte: 18 } }) {
       id
+      name
       pokemon_v2_typenames(
         where: { pokemon_v2_language: { name: { _eq: $languageName } } }
       ) {
@@ -29,6 +30,7 @@ type ListPokeTypesData = {
   pokemon_v2_type: Pick<
     Pokemon_V2_Type,
     | "id"
+    | "name"
     | "pokemon_v2_typenames"
     | "pokemon_v2_typeefficacies"
     | "pokemonV2TypeefficaciesByTargetTypeId"
@@ -40,6 +42,7 @@ const convertPokeTypes = (data: ListPokeTypesData | undefined): PokeType[] =>
     ? data.pokemon_v2_type.map((queryType) => ({
         typeId: queryType.id,
         name: queryType.pokemon_v2_typenames[0].name,
+        iconFile: `${queryType.name}.png`,
         attackerEffectivenesses: queryType.pokemon_v2_typeefficacies.map(
           (queryEfficacy) => ({
             targetTypeId: queryEfficacy.target_type_id!,
