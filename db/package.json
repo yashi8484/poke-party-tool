@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "deno run --allow-read --allow-net index.ts",
+    "dev": "deno run --allow-read --allow-net --allow-env index.ts",
     "codegen": "graphql-codegen --config codegen.ts",
     "nessie": "deno run -A --unstable https://deno.land/x/nessie/cli.ts"
   },
