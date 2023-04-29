@@ -29,6 +29,10 @@ type PokeMove = {
   typeId: TypeId;
 };
 
+type PokeItem = {
+  name: string;
+};
+
 type Pokemon = {
   pokedexNumber: number;
   speciesId: number;
